@@ -7,7 +7,7 @@ from item.models import Category, Item
 # index view
 def index(request):
     # get 6 first items that are not sold
-    items = Item.objects.filter(is_sold=False)[:5]
+    items = Item.objects.filter(is_sold=False)[:6]
     # from all categories
     categories = Category.objects.all()
     context = {
