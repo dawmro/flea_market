@@ -28,3 +28,7 @@ class Item(models.Model):
     is_sold = models.BooleanField(default=False)
     created_by = models.ForeignKey(User, related_name='items', on_delete=models.CASCADE)
     crerated_at = models.DateTimeField(auto_now_add=True)
+
+        # display name of item objects
+    def __str__(self):
+        return self.name
