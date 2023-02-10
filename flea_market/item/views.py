@@ -2,6 +2,7 @@ from django.shortcuts import render, get_object_or_404
 
 from .models import Item
 
+
 # Create your views here.
 
 # detail view
@@ -17,4 +18,7 @@ def detail(request, pk):
     }
 
     return render(request, 'item/detail.html', context)
+
+
+
 

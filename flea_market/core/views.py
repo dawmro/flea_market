@@ -2,6 +2,8 @@ from django.shortcuts import render
 
 from item.models import Category, Item
 
+from .forms import SignupForm
+
 # Create your views here.
 
 # index view
@@ -14,7 +16,6 @@ def index(request):
         'items': items,
         'categories': categories
     }
-
     return render(request, 'core/index.html', context)
 
 
@@ -23,4 +24,11 @@ def contact(request):
     return render(request, 'core/contact.html')
 
 
-# contact view
+# signup view
+def signup(request):
+    form = SignupForm()
+
+    context = {
+        'form': form
+    }
+    return render(request, 'core/signup.html', context)
