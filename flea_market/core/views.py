@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 
 from item.models import Category, Item
 
@@ -26,7 +26,16 @@ def contact(request):
 
 # signup view
 def signup(request):
-    form = SignupForm()
+
+    if request.method == 'POST':
+        # new instance of form and get all info from request
+        form = SignupForm(request.POST)
+        if form.is_valid():
+            form.save()
+        return redirect('/login/') 
+
+    else:
+        form = SignupForm()
 
     context = {
         'form': form
