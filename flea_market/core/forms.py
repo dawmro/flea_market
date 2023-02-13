@@ -16,17 +16,17 @@ class SignupForm(UserCreationForm):
         'class': 'w-full py-4 px-6 rounded-xl'
     }))
     # modify looks of email field
-    email = forms.CharField(widget=forms.TextInput(attrs={
+    email = forms.CharField(widget=forms.EmailInput(attrs={
         'placeholder': 'Your Email goes here',
         'class': 'w-full py-4 px-6 rounded-xl'
     }))
     # modify looks of password1 field
-    password1 = forms.CharField(widget=forms.TextInput(attrs={
+    password1 = forms.CharField(widget=forms.PasswordInput(attrs={
         'placeholder': 'Your Password goes here',
         'class': 'w-full py-4 px-6 rounded-xl'
     }))
     # modify looks of password2 field
-    password2 = forms.CharField(widget=forms.TextInput(attrs={
+    password2 = forms.CharField(widget=forms.PasswordInput(attrs={
         'placeholder': 'Repeat Your Password here',
         'class': 'w-full py-4 px-6 rounded-xl'
     }))
