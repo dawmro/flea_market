@@ -1,6 +1,8 @@
 from django.shortcuts import render, get_object_or_404
+from django.contrib.auth.decorators import login_required
 
 from .models import Item
+from .forms import NewItemForm
 
 
 # Create your views here.
@@ -18,6 +20,18 @@ def detail(request, pk):
     }
 
     return render(request, 'item/detail.html', context)
+
+
+# new item view
+@login_required
+def new_item(request):
+    form = NewItemForm()
+
+    context = {
+        'form': form,
+        'title': 'New Item'
+    }
+    return render(request, 'item/form.html', context)
 
 
 
