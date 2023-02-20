@@ -89,11 +89,18 @@ def edit_item(request, pk):
 
 
 def items(request):
+    # get user query from page
+    query = request.GET.get('query', '')
     # get all items that are not sold
     items = Item.objects.filter(is_sold=False)
 
+    if query != '':
+        # filter items whose name includes the query
+        items = items.filter(name__icontains=query)
+
     context = {
         'items': items,
+        'query': query,
     }
     return render(request, 'item/items.html', context)
 
