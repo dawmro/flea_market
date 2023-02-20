@@ -36,3 +36,31 @@ class NewItemForm(forms.ModelForm):
                 'class': INPUT_CLASSES
             })
         }
+
+
+class EditItemForm(forms.ModelForm):
+    class Meta:
+        # model to use
+        model = Item
+        # fields to use
+        fields = ('name', 'description', 'price', 'image', 'is_sold')
+
+        # create widgets to override defaults
+        widgets = {
+            # add styling to make name text input look better
+            'name': forms.TextInput(attrs={
+                'class': INPUT_CLASSES
+            }),
+            # add styling to make description text area look better
+            'description': forms.Textarea(attrs={
+                'class': INPUT_CLASSES
+            }),
+            # add styling to make price text input look better
+            'price': forms.TextInput(attrs={
+                'class': INPUT_CLASSES
+            }),
+            # add styling to makeimage file input look better
+            'image': forms.FileInput(attrs={
+                'class': INPUT_CLASSES
+            })
+        }

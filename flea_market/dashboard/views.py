@@ -14,3 +14,4 @@ def index(request):
         'items': items,
     }
     return render(request, 'dashboard/index.html', context)
+

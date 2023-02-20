@@ -2,7 +2,7 @@ from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.auth.decorators import login_required
 
 from .models import Item
-from .forms import NewItemForm
+from .forms import NewItemForm, EditItemForm
 
 
 # Create your views here.
@@ -58,4 +58,32 @@ def delete_item(request, pk):
     item.delete()
 
     return redirect('dashboard:index')
+
+
+# new item view
+@login_required
+def edit_item(request, pk):
+    # get item from Item model using primary key from url and created by current user
+    item = get_object_or_404(Item, pk=pk, created_by=request.user)
+
+    # handle POST request
+    if request.method == 'POST':
+        # get form data and files uploaded by user
+        form = EditItemForm(request.POST, request.FILES, instance=item)
+        # if there were no errors
+        if form.is_valid():
+            form.save()
+            # return view and private key as id of item that just have been created
+            return redirect('item:detail', pk=item.id)
+
+    # handle GET request        
+    else:
+        # pass data so form will not be empty
+        form = EditItemForm(instance=item)
+
+        context = {
+            'form': form,
+            'title': 'Edit Item'
+        }
+        return render(request, 'item/form.html', context)
 
