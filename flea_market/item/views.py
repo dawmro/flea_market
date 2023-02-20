@@ -60,7 +60,7 @@ def delete_item(request, pk):
     return redirect('dashboard:index')
 
 
-# new item view
+# edit item view
 @login_required
 def edit_item(request, pk):
     # get item from Item model using primary key from url and created by current user
@@ -86,4 +86,14 @@ def edit_item(request, pk):
             'title': 'Edit Item'
         }
         return render(request, 'item/form.html', context)
+
+
+def items(request):
+    # get all items that are not sold
+    items = Item.objects.filter(is_sold=False)
+
+    context = {
+        'items': items,
+    }
+    return render(request, 'item/items.html', context)
 
