@@ -39,7 +39,7 @@ def new_item(request):
             form.save()
             # return view and private key as id of item that just have been created
             return redirect('item:detail', pk=item.id)
-            
+
     # handle GET request        
     else:
         form = NewItemForm()
@@ -51,5 +51,11 @@ def new_item(request):
         return render(request, 'item/form.html', context)
 
 
+@login_required
+def delete_item(request, pk):
+    # get item from Item model using primary key from url and created by current user
+    item = get_object_or_404(Item, pk=pk, created_by=request.user)
+    item.delete()
 
+    return redirect('dashboard:index')
 
