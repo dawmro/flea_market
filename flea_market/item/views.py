@@ -2,7 +2,7 @@ from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.auth.decorators import login_required
 from django.db.models import Q
 
-from .models import Item
+from .models import Item, Category
 from .forms import NewItemForm, EditItemForm
 
 
@@ -92,8 +92,15 @@ def edit_item(request, pk):
 def items(request):
     # get user query from page
     query = request.GET.get('query', '')
+    category_id = request.GET.get('category', 0)
     # get all items that are not sold
     items = Item.objects.filter(is_sold=False)
+
+    categories = Category.objects.all()
+
+    if category_id:
+        # select items only from given category
+        items = items.filter(category_id=category_id)
 
     if query != '':
         # filter items whose name includes the query or description includes the query
@@ -102,6 +109,8 @@ def items(request):
     context = {
         'items': items,
         'query': query,
+        'categories': categories,
+        'category_id': int(category_id),
     }
     return render(request, 'item/items.html', context)
 
