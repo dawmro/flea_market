@@ -17,7 +17,7 @@ def new_conversation(request, item_pk):
         return redirect('dashboard:index')
 
     # get all conversations connected to this item when current user is member of conversation
-    conversations = Converstaion.objects.filter(item=item).filter(members__in=[request.user.id])
+    conversations = Conversation.objects.filter(item=item).filter(members__in=[request.user.id])
 
     # check if conversation about item with item owner and current user already exists
     if conversations:
@@ -32,7 +32,7 @@ def new_conversation(request, item_pk):
 
         if form.is_valid():
             # create new conversation
-            converstation = Converstation.objects.create(item=item)
+            conversation = Conversation.objects.create(item=item)
             # add current user to members of conversation
             conversation.members.add(request.user)
             # add owner of item to members of conversation
