@@ -23,9 +23,8 @@ def new_conversation(request, item_pk):
 
     # check if conversation about item with item owner and current user already exists
     if conversations:
-        pass
-        # TODO
         # redirect to conversation page
+        return redirect('conversation:detail', pk=conversations.first().id)
 
     # check if form has been submited, handle POST request
     if request.method == 'POST':
