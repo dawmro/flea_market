@@ -84,7 +84,29 @@ def detail(request, pk):
     # get conversation that current user is member of, where pk is pk of this conversation
     conversation = Conversation.objects.filter(members__in=[request.user.id]).get(pk=pk)
 
+    # check if form has been submited, handle POST request
+    if request.method == 'POST':
+        # get data from form
+        form = ConversationMessageForm(request.POST)
+
+        if form.is_valid():
+            conversation_message = form.save(commit=False)
+            # link to current conversation
+            conversation_message.conversation = conversation
+            conversation_message.created_by = request.user
+            conversation_message.save()
+
+            conversation.save()
+
+            return redirect('conversation:detail', pk=pk)
+
+    # handle GET request
+    else:
+        # create empty instance
+        form = ConversationMessageForm()
+
     context = {
-        'conversation': conversation
+        'conversation': conversation,
+        'form': form,
     }
     return render(request, 'conversation/detail.html', context)
