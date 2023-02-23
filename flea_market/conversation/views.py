@@ -78,3 +78,13 @@ def inbox(request):
     return render(request, 'conversation/inbox.html', context)
 
 
+# conversation detail view, pk of conversation
+@login_required
+def detail(request, pk):
+    # get conversation that current user is member of, where pk is pk of this conversation
+    conversation = Conversation.objects.filter(members__in=[request.user.id]).get(pk=pk)
+
+    context = {
+        'conversation': conversation
+    }
+    return render(request, 'conversation/detail.html', context)
