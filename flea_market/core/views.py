@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 from django.contrib.auth import logout
 from django.contrib.auth.decorators import login_required
 
+
 from item.models import Category, Item
 
 from .forms import SignupForm
@@ -33,14 +34,19 @@ def signup(request):
         # new instance of form and get all info from request
         form = SignupForm(request.POST)
         if form.is_valid():
+            print("SIGNUP FORM VALID!")
+            print(form.cleaned_data["captcha"])
+            # save user    
             form.save()
-            return redirect('/login/') 
+            return redirect('/login/')
+        else:
+            print("SIGNUP FORM INVALID!") 
 
-    else:
+    else:        
         form = SignupForm()
-
+        
     context = {
-        'form': form
+        'form': form,
     }
     return render(request, 'core/signup.html', context)
 

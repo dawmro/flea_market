@@ -22,6 +22,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = 'django-insecure-izs^y_v$(*pny1z$%p1q^l&hini+v_b7m^r$qo-=l*#plq_q(c'
 
+RECAPTCHA_PUBLIC_KEY = '6LdTurMkAAAAAPlmMQvNy6R9-FjU8vlaZxR9nSzU'
+RECAPTCHA_PRIVATE_KEY = '6LdTurMkAAAAANEgqEJSiWauz1jPCdfh56BFXPf7'
+
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
@@ -45,6 +48,7 @@ INSTALLED_APPS = [
     'core',
     'dashboard',
     'item',
+    'captcha',
 ]
 
 MIDDLEWARE = [
