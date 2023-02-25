@@ -1,4 +1,6 @@
 from django.shortcuts import render, redirect
+from django.contrib.auth import logout
+from django.contrib.auth.decorators import login_required
 
 from item.models import Category, Item
 
@@ -41,3 +43,10 @@ def signup(request):
         'form': form
     }
     return render(request, 'core/signup.html', context)
+
+
+# logout view
+@login_required
+def logout_view(request):
+    logout(request)
+    return redirect('/login/')
