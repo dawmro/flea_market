@@ -24,9 +24,18 @@ cd ./flea_market
 ``` sh
 python manage.py migrate
 ```
+6. Create admin account:
+``` sh
+python manage.py createsuperuser
+```
+
 
 ## Usage:
 1. Start server:
 ``` sh
 python manage.py runserver
+```
+2. Add categories for items in admin panel:
+``` sh
+http://127.0.0.1:8000/admin/
 ```
