@@ -3,6 +3,7 @@ from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth.models import User
 
 from captcha.fields import ReCaptchaField
+from captcha.widgets import ReCaptchaV3
 
 class SignupForm(UserCreationForm):
     class Meta:
@@ -32,7 +33,7 @@ class SignupForm(UserCreationForm):
         'class': 'w-full py-4 px-6 rounded-xl'
     }))
     # create captcha instance
-    captcha = ReCaptchaField()
+    captcha = ReCaptchaField(widget=ReCaptchaV3)
 
 
 class LoginForm(AuthenticationForm):
